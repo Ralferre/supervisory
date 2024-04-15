@@ -1,0 +1,101 @@
+Project: Supervisory
+
+Instancies of the project:
+
+	- Table User:
+					Id_User: number;
+					User_Name: string;
+					Name: string;
+					User_Password: string (min 8 and max 14 characteres);
+					Profile: string;
+					Created_On: string (MM/DD/YYYY HH:MM);
+
+					User {
+							IdUser: 1,
+							UserName: "Raphael",
+							Name: "Raphael Lopes Ferreira",
+							UserPassword: Teste@1234,
+							Profile: "Supervisor",
+							CreatedOn: "04-12-2024 14:22"
+					}	
+
+			Types of profile:
+								Manager;
+								Supervisor;
+								Operator;
+
+	- Table Detector:
+						Id_Detector: number;
+						Tag: string;
+						Name: string;
+						Serial_Number: string;
+						Range: string;
+						Installed_Area: string;
+						Location_Area: string;
+						Date_Last_Calibration: string (MM/DD/YYYY HH:MM);
+						Date_Next_Calibration: string (MM/DD/YYYY HH:MM);
+
+						Detector {
+									IdDetector: 1,
+									Tag: "DT_001",
+									Name: "Cooling tank",
+									SerialNumber: "S/N: 4567-E468",
+									Range: "0 - 100",
+									Installed_Area: "Ham factory",
+									Location_Area: "Cooling tank 01",
+									Date_Last_Calibration: 01-04-2024 10:44;
+									Date_Next_Calibration: 01-04-2025 10:44;
+						}
+
+	- Fact Table Detector Event:
+									Id_Event: number;
+									Id_Detector: number;
+									Max_Register: number;
+									Date_Register: string (MM/DD/YYYY HH:MM);
+
+									DetectorEvent {
+													IdEvent: 1,
+													IdDetector: 1,
+													MaxRegister: 48.6,
+													DateRegister: 04-12-2024 14:30
+									}
+
+	- Fact Table Manage Detector Event:
+										Id_Action_Manage: number;
+										Id_Detector: number;
+										Id_User: number;
+										Date_Action: string (MM/DD/YYYY HH:MM);
+										Type_Action_Manage: string;
+				Types of action manage:
+										Alarm - it means that the event detector is active;
+										
+
+	- Fact Table Action Upon the Event:
+										Id_Action_Event: number;
+										Id_Action_Manage: number;
+										Id_User: string;
+										Rearmed_On: string (MM/DD/YYYY HH:MM);
+										Muted_On: string (MM/DD/YYYY HH:MM);
+										Recognized_On: string (MM/DD/YYYY HH:MM);
+
+				Types and definitions os the actions upon the event:
+										Rearmed - it means that the operator treated the leak and rearmed it;
+										Muted - it means that the leak does not treat, operator muted the alarm, but there is a sign in the supervisory about the detector;
+										Recognized - it means that the operator has done treat the leak and recognized the alarm, to change the color of the detector which was muted;
+
+	- Fact Table Create New User:
+									Id_New_User: number;
+									Id_User: number;
+									User_Name: string (first name for example);
+									Name: string;
+									E-mail: string;
+									Default_Password: string;
+									Created_On: string (MM/DD/YYYY HH:MM);
+
+				Conditions to create a new user:
+													Only profile Manager and Supervisor can create a new user, a new manager, or supervisor or operator;
+
+
+
+
+
