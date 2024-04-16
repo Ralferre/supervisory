@@ -88,7 +88,7 @@ Instancies of the project:
 									Id_User: number;
 									User_Name: string (first name for example);
 									Name: string;
-									E-mail: string;
+									E_Mail: string;
 									Default_Password: string;
 									Created_On: string (MM/DD/YYYY HH:MM);
 
