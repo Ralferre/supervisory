@@ -11,7 +11,7 @@ public class NewUser extends User{
     @JsonProperty("Id_New_User")
     private Integer idNewUser;
     @JsonProperty("E_Mail")
-    private String eMail;
+    private String email;
     @JsonProperty("Default_Password")
     private String defaultPassword;
 
@@ -21,12 +21,12 @@ public class NewUser extends User{
         return idNewUser;
     }
 
-    public String getEMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
+    public void setEMail(String email) {
+        this.email = email;
     }
 
     public String getDefaultPassword() {
