@@ -2,7 +2,7 @@ Project: Supervisory
 
 Instancies of the project:
 
-	- Table User:
+	- Table Users:
 					Id_User: number;
 					User_Name: string;
 					Name: string;
@@ -10,7 +10,7 @@ Instancies of the project:
 					Profile: string;
 					Created_On: string (MM/DD/YYYY HH:MM);
 
-					User {
+					Users {
 							IdUser: 1,
 							UserName: "Raphael",
 							Name: "Raphael Lopes Ferreira",
@@ -23,6 +23,8 @@ Instancies of the project:
 								Manager;
 								Supervisor;
 								Operator;
+
+			URL service API User: "/api-supervisory/users"
 
 	- Table Detector:
 						Id_Detector: number;
@@ -94,6 +96,16 @@ Instancies of the project:
 
 				Conditions to create a new user:
 													Only profile Manager and Supervisor can create a new user, a new manager, or supervisor or operator;
+
+Technologies:
+				Java
+				MySQL
+				React
+				Docker
+
+Repositories URL which were developed an application Java API:
+	- https://github.com/mariazevedo88/travels-java-api/blob/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller/v1/travel/TravelController.java;
+	- https://github.com/rmnresende/exemplo-spring-boot-api-rest-jpa-oauth/blob/master/src/main/java/br/com/dynamicdev/sommelierapi/model/Usuario.java;
 
 
 
