@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract interface ManageEventRepository extends JpaRepository<ManageDetectorEvent, Integer> {
     Page<ManageDetectorEvent> findAll(Pageable pageable);
-    Page<ManageDetectorEvent> findByDateActionOrTypeActionManage(
-            String dateAction,
-            String typeActionManage,
-            Pageable pageable
-    );
+    Page<ManageDetectorEvent> findByDateAction(String dateAction, Pageable pageable);
+    Page<ManageDetectorEvent> findByTypeActionManage(String typeActionManage, Pageable pageable);
+//    Page<ManageDetectorEvent> findByDateActionOrTypeActionManage(
+//            String dateAction,
+//            String typeActionManage,
+//            Pageable pageable
+//    );
 }

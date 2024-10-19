@@ -10,7 +10,6 @@ public class SupervisoryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SupervisoryApplication.class, args);
-
 	}
 
 }

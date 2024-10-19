@@ -12,6 +12,10 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "Users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
+    @Column(name = "Id_User")
     @JsonProperty("Id_User")
     private Integer idUser;
     @JsonProperty("User_Name")
@@ -26,21 +30,19 @@ public class User {
     private String userPassword;
     @JsonProperty("Profile")
     @NotBlank(message = "Profile cannot be blank")
-    @Pattern(regexp = "ˆ(MANAGER|SUPERVISOR|OPERATOR)$",
+    @Pattern(regexp = "^(MANAGER|SUPERVISOR|OPERATOR)$",
     message = "Only these types of profile are accepted inside the application")
     private String profile;
     @JsonProperty("Created_On")
     private String createdOn;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
-    }
+//    public void setIdUser(Integer idUser) {
+//        this.idUser = idUser;
+//    }
 
     public String getUserName() {
         return userName;
@@ -78,7 +80,7 @@ public class User {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
         this.createdOn = now.format(formatter);
