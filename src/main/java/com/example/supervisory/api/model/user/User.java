@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
     @Column(name = "Id_User")
     @JsonProperty("Id_User")
     private Integer idUser;
