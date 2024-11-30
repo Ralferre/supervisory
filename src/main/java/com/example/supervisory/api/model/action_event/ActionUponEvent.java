@@ -1,9 +1,9 @@
 package com.example.supervisory.api.model.action_event;
 
+import com.example.supervisory.api.model.detector_event.DetectorEvent;
+import com.example.supervisory.api.model.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,14 +11,18 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "Action_Upon_Event")
 public class ActionUponEvent {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("Id_Action_Event")
     private Integer idActionEvent;
-    @JsonProperty("Id_Action_Manage")
-    @NotBlank(message = "Id action manage cannot be blank")
-    private Integer idActionManage;
-    @JsonProperty("Id_User")
-    @NotBlank(message = "Id user cannot be blank")
-    private Integer idUser;
+    @ManyToOne
+    @JoinColumn(name = "Id_Detector_Event", nullable = false)
+//    @JsonProperty("Id_Detector_Event")
+    private DetectorEvent detectorEvent;
+    @ManyToOne
+    @JoinColumn(name = "Id_User", nullable = false)
+//    @JsonProperty("Id_User")
+    private User user;
     @JsonProperty("Rearmed_On")
     //REARMED means that the operator treated the leak and reamed it, changing the visual color in the screen
     private String rearmedOn;
@@ -29,31 +33,29 @@ public class ActionUponEvent {
     //RECOGNIZED means that the operator has done treat the leak and recognized the alarm, to change the color of the detector which was muted
     private String recognizedOn;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    public DetectorEvent getDetectorEvent() {
+        return detectorEvent;
+    }
+
+    public void setDetectorEvent(DetectorEvent detectorEvent) {
+        this.detectorEvent = detectorEvent;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getIdActionEvent() {
         return idActionEvent;
     }
 
-    public void setIdActionEvent(Integer idActionEvent) {
-        this.idActionEvent = idActionEvent;
-    }
-
-    public Integer getIdActionManage() {
-        return idActionManage;
-    }
-
-    public void setIdActionManage(Integer idActionManage) {
-        this.idActionManage = idActionManage;
-    }
-
-    public Integer getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
-    }
+//    public void setIdActionEvent(Integer idActionEvent) {
+//        this.idActionEvent = idActionEvent;
+//    }
 
     public String getRearmedOn() {
         return rearmedOn;
@@ -79,21 +81,23 @@ public class ActionUponEvent {
         return recognizedOn;
     }
 
-    public void setRearmedOn(String rearmedOn) {
-        this.rearmedOn = rearmedOn;
-    }
-
-    public void setMutedOn(String mutedOn) {
-        this.mutedOn = mutedOn;
-    }
-
-    public void setRecognizedOn(String recognizedOn) {
-        this.recognizedOn = recognizedOn;
-    }
-
     public void setRecognizedOn() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
         this.recognizedOn = now.format(formatter);
     }
+
+//    public void setRearmedOn(String rearmedOn) {
+//        this.rearmedOn = rearmedOn;
+//    }
+
+//    public void setMutedOn(String mutedOn) {
+//        this.mutedOn = mutedOn;
+//    }
+
+//    public void setRecognizedOn(String recognizedOn) {
+//        this.recognizedOn = recognizedOn;
+//    }
+
+
 }

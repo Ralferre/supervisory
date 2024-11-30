@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract interface DetectorRepository extends JpaRepository<Detector, Integer> {
     Page<Detector> findAll(Pageable pageable);
+    Detector findByTag(String tag);
     Page<Detector> findByTag(String tag, Pageable pageable);
     Page<Detector> findByName(String name, Pageable pageable);
     Page<Detector> findBySerialNumber(String serialNumber, Pageable pageable);

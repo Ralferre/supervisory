@@ -14,15 +14,14 @@ import java.time.format.DateTimeFormatter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
     @Column(name = "Id_User")
     @JsonProperty("Id_User")
     private Integer idUser;
     @JsonProperty("User_Name")
-    @NotBlank(message = "UserName cannot be blank")
+//    @NotBlank(message = "UserName cannot be blank")
     private String userName;
     @JsonProperty("Name")
-    @NotBlank(message = "Name cannot be blank")
+//    @NotBlank(message = "Name cannot be blank")
     private String name;
     @JsonProperty("User_Password")
     @NotBlank(message = "UserPassword cannot be blank")

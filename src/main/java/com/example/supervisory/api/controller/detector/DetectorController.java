@@ -1,15 +1,14 @@
 package com.example.supervisory.api.controller.detector;
 
 import com.example.supervisory.api.model.detector.Detector;
-import com.example.supervisory.api.model.user.User;
 import com.example.supervisory.api.repository.detector.DetectorRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api-supervisory/detectors")
@@ -23,8 +22,8 @@ public class DetectorController {
     }
 
     @GetMapping("/tag")
-    public Page<Detector> getByTag(@RequestParam String tag, Pageable pageable) {
-        return detectorRepository.findByTag(tag, pageable);
+    public Detector getByTag(@RequestParam String tag) {
+        return detectorRepository.findByTag(tag);
     }
 
     @GetMapping("/name")
@@ -60,5 +59,12 @@ public class DetectorController {
     @GetMapping("/date-next-calibration")
     public Page<Detector> getByDateNextCalibration(@RequestParam String dateNextCalibration, Pageable pageable) {
         return detectorRepository.findByDateNextCalibration(dateNextCalibration, pageable);
+    }
+
+    @PostMapping("/create-detector")
+    public ResponseEntity<Detector> createDetector(@Valid @RequestBody Detector detector) {
+        Detector savedDetector = detectorRepository.save(detector);
+
+        return new ResponseEntity<>(savedDetector, HttpStatus.CREATED);
     }
 }

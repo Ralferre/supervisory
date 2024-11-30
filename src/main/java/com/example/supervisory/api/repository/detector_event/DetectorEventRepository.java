@@ -9,5 +9,6 @@ public abstract interface DetectorEventRepository extends JpaRepository<Detector
     Page<DetectorEvent> findAll(Pageable pageable);
     Page<DetectorEvent> findByMaxRegister(Double maxRegister, Pageable pageable);
     Page<DetectorEvent> findByDateRegister(String dateRegister, Pageable pageable);
+    Page<DetectorEvent> findByTag(String tag, Pageable pageable);
     //Page<DetectorEvent> findByMaxRegisterOrDateRegister(Double maxRegister, String dateRegister, Pageable pageable);
 }

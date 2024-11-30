@@ -1,8 +1,10 @@
 package com.example.supervisory.api.model.detector_event;
 
+import com.example.supervisory.api.model.detector.Detector;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,34 +12,34 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "Detector_Event")
 public class DetectorEvent {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("Id_Event")
     private Integer idEvent;
-    @JsonProperty("Id_Detector")
-    @NotBlank(message = "Id detector cannot be blank")
-    private Integer idDetector;
+    @JsonProperty("Tag")
+    @NotBlank(message = "Tag detector cannot be blank")
+    private String tag;
     @JsonProperty("Max_Register")
-    @NotBlank(message = "Maximum value registered cannot be blank")
+    @NotNull(message = "Maximum value registered cannot be blank")
     private Double maxRegister;
     @JsonProperty("Date_Register")
-    @NotBlank(message = "Date of register cannot be blank")
     private String dateRegister;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer getIdEvent() {
-        return idEvent;
+    @ManyToOne
+    @JoinColumn(name = "Id_Detector", nullable = false)
+    @JsonProperty("Id_Detector")
+    private Detector detector;
+
+    public Detector getDetector() {
+        return detector;
     }
 
-    public void setIdEvent(Integer idEvent) {
-        this.idEvent = idEvent;
+    public void setDetector(Detector detector) {
+        this.detector = detector;
     }
 
-    public Integer getIdDetector() {
-        return idDetector;
-    }
-
-    public void setIdDetector(Integer idDetector) {
-        this.idDetector = idDetector;
+    public String getTag() {
+        return tag;
     }
 
     public Double getMaxRegister() {
@@ -52,7 +54,7 @@ public class DetectorEvent {
         return dateRegister;
     }
 
-    public void setDateRegister(String dateRegister) {
+    public void setDateRegister() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
         this.dateRegister = now.format(formatter);

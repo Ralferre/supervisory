@@ -1,0 +1,113 @@
+Project: Supervisory
+
+Instancies of the project:
+
+	- Table Users:
+					Id_User: number;
+					User_Name: string;
+					Name: string;
+					User_Password: string (min 8 and max 14 characteres);
+					Profile: string;
+					Created_On: string (MM/DD/YYYY HH:MM);
+
+					Users {
+							IdUser: 1,
+							UserName: "Raphael",
+							Name: "Raphael Lopes Ferreira",
+							UserPassword: Teste@1234,
+							Profile: "Supervisor",
+							CreatedOn: "04-12-2024 14:22"
+					}	
+
+			Types of profile:
+								Manager;
+								Supervisor;
+								Operator;
+
+			URL service API User: "/api-supervisory/users"
+
+	- Table Detector:
+						Id_Detector: number;
+						Tag: string;
+						Name: string;
+						Serial_Number: string;
+						Range: string;
+						Installed_Area: string;
+						Location_Area: string;
+						Date_Last_Calibration: string (MM/DD/YYYY HH:MM);
+						Date_Next_Calibration: string (MM/DD/YYYY HH:MM);
+
+						Detector {
+									IdDetector: 1,
+									Tag: "DT_001",
+									Name: "Cooling tank",
+									SerialNumber: "S/N: 4567-E468",
+									Range: "0 - 100",
+									Installed_Area: "Ham factory",
+									Location_Area: "Cooling tank 01",
+									Date_Last_Calibration: 01-04-2024 10:44,
+									Date_Next_Calibration: 01-04-2025 10:44
+						}
+
+	- Fact Table Detector Event:
+									Tag: string;
+									Max_Register: number;
+
+									DetectorEvent {
+													IdEvent: 1,
+													Tag: DT_002,
+													Max_Register: 45.7,
+													Date_Register: 10-20-2014 20:48,
+													Id_Detector: {
+																	Id_Detector: 2,
+																	Tag": "DT_002,
+                													Name": "Amonia detector antechamber,
+                													Serial_Number": "s/n002.849,
+                													Detector_Range": "0-60,
+                													Installed_Area": "Expedition,
+                													Location_Area": "Pig shipment,
+                													Date_Last_Calibration": "10-19-2024,
+                													Date_Next_Calibration": "10-19-2025
+																 }
+												  }
+										
+
+	- Fact Table Action Upon the Event:
+										Id_Action_Event: number;
+										Id_Detector_Event: DetectorEvent;
+										Id_User: User;
+										Rearmed_On: string (MM/DD/YYYY HH:MM);
+										Muted_On: string (MM/DD/YYYY HH:MM);
+										Recognized_On: string (MM/DD/YYYY HH:MM);
+
+				Types and definitions os the actions upon the event:
+										Rearmed - it means that the operator treated the leak and rearmed it;
+										Muted - it means that the leak does not treat, operator muted the alarm, but there is a sign in the supervisory about the detector;
+										Recognized - it means that the operator has done treat the leak and recognized the alarm, to change the color of the detector which was muted;
+
+	- Fact Table Create New User:
+									Id_New_User: number;
+									Id_User: number;
+									User_Name: string (first name for example);
+									Name: string;
+									E_Mail: string;
+									Default_Password: string;
+									Created_On: string (MM/DD/YYYY HH:MM);
+
+				Conditions to create a new user:
+													Only profile Manager and Supervisor can create a new user, a new manager, or supervisor or operator;
+
+Technologies:
+				Java
+				MySQL
+				React
+				Docker
+
+Repositories URL which were developed an application Java API:
+	- https://github.com/mariazevedo88/travels-java-api/blob/master/src/main/java/io/github/mariazevedo88/travelsjavaapi/controller/v1/travel/TravelController.java;
+	- https://github.com/rmnresende/exemplo-spring-boot-api-rest-jpa-oauth/blob/master/src/main/java/br/com/dynamicdev/sommelierapi/model/Usuario.java;
+
+
+
+
+

@@ -10,7 +10,10 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "Detectors")
 public class Detector {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("Id_Detector")
+    @Column(name = "Id_Detector")
     private Integer idDetector;
     @JsonProperty("Tag")
     @NotBlank(message = "Tag cannot be blank")
@@ -34,11 +37,8 @@ public class Detector {
     @NotBlank(message = "Date last calibration cannot be blank")
     private String dateLastCalibration;
     @JsonProperty("Date_Next_Calibration")
-    @NotBlank(message = "Date next calibration cannot be blank")
     private String dateNextCalibration;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getIdDetector() {
         return idDetector;
     }
